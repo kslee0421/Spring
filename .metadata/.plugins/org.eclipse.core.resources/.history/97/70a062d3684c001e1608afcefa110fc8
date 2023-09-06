@@ -1,0 +1,11 @@
+package sp1;
+
+
+//LinkedList 
+public class array_link1 {
+
+	public static void main(String[] args) {
+		
+	}
+
+}

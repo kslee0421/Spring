@@ -1,0 +1,9 @@
+package sp1;
+
+import org.springframework.web.servlet.mvc.Controller;
+
+public class index implements Controllertr {
+	
+	
+}
+

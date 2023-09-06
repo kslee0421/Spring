@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Spring 2일차 - checkbox 핸들링</title>
+</head>
+<body>
+<form id="f" method="post" action="./spring2ok.do"></form>
+</body>
+</html>
