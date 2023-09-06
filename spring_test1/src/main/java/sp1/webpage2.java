@@ -1,7 +1,15 @@
 package sp1;
 
 import java.io.PrintWriter;
+import java.net.PasswordAuthentication;
+import java.util.Properties;
 
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.security.auth.login.LoginException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -44,8 +52,6 @@ public class webpage2 {
 		else { 
 			ad = req.getParameter("ad").intern();	
 		}
-
-
 		if(ag==null) {
 			ag = "N";
 			System.out.println("동의안함");
@@ -65,7 +71,55 @@ public class webpage2 {
 		
 		System.out.println(ud.getMid());
 		System.out.println(ud.getMname());
-	
+		return null;
+	}
+	//실제 메일 서비스 + 네이버 naver.com/nate.com 가능  메일서버 (google은 안됨 (ip는막기 때문), hanmail안됨)
+	@PostMapping("/spring4ok.do")
+	public String mails(HttpServletRequest req , HttpServletResponse res, Model m) {
+		String ename = req.getParameter("ename"); //보낸이 
+		String email = req.getParameter("email");  //회신 받을 메일
+		String etitle = req.getParameter("etitle"); //제목
+		String econ = req.getParameter("econ"); //내용
+		
+		
+		/* 실제 메일 API 서버 정보를 입력*/
+		String host = "smtp.naver.com";
+		String user = "ox161472@naver.com";
+		String password = "";
+		String to_mail = "ox161472@naver.com";
+		
+		
+		/*API 포트번호 및 TLS 정보를 입력*/
+		Properties props = new Properties();
+		props.put("mail.smtp.host",host);
+		props.put("mail.smtp.port",587);
+		props.put("mail.smtp.auth","true");
+		props.put("mail.smtp.debug","true");
+		props.put("mail.smtp.socketFactory.port",587);
+		props.put("mail.smtp.ssl.protocols","TLSv1.2");
+		
+		//SMTP 서버에 로그인을 시키기위한 작업(암호화)
+		Session session = Session.getDefaultInstance(props,new Authenticator() {
+			protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+				return new javax.mail.PasswordAuthentication(user, password);
+			}
+		});// Session,... (javx.mail)
+		try {
+			//MimeMessage : okcall 발생함 아이디/패스워드, 포트 모두 맞을 경우
+			MimeMessage msg = new MimeMessage(session);
+			msg.setFrom(new InternetAddress(email,ename));  //보낸이
+			//받는 메일 주소
+			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(to_mail));
+			msg.setSubject(etitle); //제목
+			msg.setText(econ); //내용
+			Transport.send(msg); //발송
+			System.out.println("메일 발송이 정상적으로 되었습니다.");
+		}
+		catch(Exception e) {
+			System.out.println("메일 서버 통신 오류!!");
+		}
+		
+		return null;
 	}
 }
 

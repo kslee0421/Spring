@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>이메일 발송 시스템</title>
+</head>
+<body>
+	<form id="f" method="post" action="./emailok.do">
+고객명 : <input type="text" name="mid"></input> 
+받는메일 :<input type="text" name="mname"></input>
+</body>
+</html>

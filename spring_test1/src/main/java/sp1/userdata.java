@@ -1,6 +1,6 @@
 package sp1;
 
-//module gettet, setter
+//module getter, setter
 public class userdata {
 	String mid = null;
 	String mname = null;
