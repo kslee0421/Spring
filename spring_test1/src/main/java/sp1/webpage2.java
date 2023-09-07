@@ -2,6 +2,9 @@ package sp1;
 
 import java.io.PrintWriter;
 import java.net.PasswordAuthentication;
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -16,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -120,6 +124,30 @@ public class webpage2 {
 		}
 		
 		return null;
+	}
+	//Controller에서 배열을 JSP (View)로 출력하는형태
+	@GetMapping("/spring5ok.do")
+	public String datalist(HttpServletRequest req, Model m) {
+		//dbconfig db = new dbconfig();
+		//try {
+		//Connection ct = db.info();
+		//System.out.println(ct.toString());
+		//}
+		//catch(Exception e) {
+			
+		//}
+		String data[] = {"이순신", "홍길동","강감찬","이산","한석봉"};
+		ArrayList<String> al= new ArrayList<String>(Arrays.asList(data));
+		//JSP방식 -> 
+		//req.setAttribute("person_list", al);
+		//return "/WEB-INF/jsp/spring5ok";  //일반 JSP view
+
+		//표현식
+		m.addAttribute("person_list",al);// 표현식 방식
+		m.addAttribute("peson_delete","10");
+		
+		//표현식 값을 javascript 전달 (Front-end) Node형태로 출력
+		return "/WEB-INF/jsp/spring5_2ok"; //표현식 JSP view
 	}
 }
 
