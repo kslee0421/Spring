@@ -5,6 +5,7 @@ import java.net.PasswordAuthentication;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -26,6 +27,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class webpage2 {
 	PrintWriter pw = null;
+	
+	//JSTl로 view page 출력
+	@RequestMapping("/product_list.do")
+	public String pd_list(HttpServletRequest req, Model m) {
+
+		//System.out.println(search);
+		List<ArrayList<String>> product_data = null;
+		try {
+				product_list ul = new product_list();
+				product_data= ul.listdata();
+			
+			req.setAttribute("product_data", product_data);
+		}
+		catch(Exception e ) {
+			
+		}
+		return "/WEB-INF/jsp/product_list";
+	}
+	
+	
+	
+	
+	
+	
+
 	//spring1.html에 넘어온 값을 view를 통해서 핸들링함
 	@PostMapping("/spring1ok.do")
 	public String product(HttpServletRequest req , HttpServletResponse res, Model m) {
@@ -148,6 +174,34 @@ public class webpage2 {
 		
 		//표현식 값을 javascript 전달 (Front-end) Node형태로 출력
 		return "/WEB-INF/jsp/spring5_2ok"; //표현식 JSP view
+	}
+	//사용자 리스트 출력 Mysql 이용
+	@RequestMapping("/spring6ok.do")
+	public String userlist(HttpServletRequest req, Model m) {
+		String search = req.getParameter("search");
+		String part = req.getParameter("part");
+		//System.out.println(search);
+		List<ArrayList<String>> member_data = null;
+		try {
+			if(search=="null" || search==null ||search== "") {
+				user_list ul = new user_list();
+				member_data= ul.listdata();
+			}
+			else { //검색 단어가 있을 경우 
+				user_list ul = new user_list();
+				member_data= ul.listdata(search,part);
+			}
+			//회원가입자 카운팅 
+			req.setAttribute("total", new user_list().total_member()); // ->JSP에서 get으로 받기
+			
+			req.setAttribute("member_data", member_data);
+			req.setAttribute("part", part);  //검색카테고리 --> 이후 jsp에 변수추가
+		}
+		catch(Exception e ) {
+			
+		}
+		return "/WEB-INF/jsp/member_list";
+		
 	}
 }
 

@@ -1,0 +1,55 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+	<%
+	int total = (int)request.getAttribute("total"); 
+	
+	List<ArrayList<String>> product_data= (List<ArrayList<String>>)request.getAttribute("product_data");
+	
+	int many = product_data.size();
+
+	%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>고객 리스트 페이지</title>
+</head>
+<body>
+<p>회원가입 고객 리스트 가입자 수  : <%=total%>명</p>
+<table border="1" width="1000">
+<thead>
+	<tr>
+	<th width="5%">번호</th>
+	<th width="20%">상품코드</th>
+	<th width="30%">상품명</th>
+	<th width="20%">상품가격</th>
+	<th width="5%">수정/삭제</th>
+	</tr>
+</thead>
+<tbody>
+<!-- database의 내용이 출력되는 파트 -->
+<!-- 배열값 중 첫번째 아이디 값을 확인하여 값이 없을 경우에 대한 조건 -->
+<tr align="center">
+<% 
+		int w =0 ;
+		do{
+	%>
+		<tr align="center">
+			<td><%=total%></td>
+			<td><%=member_data.get(w).get(1)%></td>
+			<td><%=member_data.get(w).get(2)%></td>
+			<td><%=member_data.get(w).get(3)%></td>
+			<td><%=member_data.get(w).get(4)%></td>
+			<td><%=member_data.get(w).get(5).substring(0,10)%></td>
+		</tr>
+	<%
+		w++;
+		} while(w < many);
+%>
+</tbody>
+</table>
+</body>
+</html>
