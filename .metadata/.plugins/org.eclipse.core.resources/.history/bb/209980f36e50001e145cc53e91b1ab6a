@@ -1,0 +1,27 @@
+package sp1;
+
+import java.sql.Connection;
+
+public class product_ok {
+	Connection con = null;
+	private void dbcon() {
+		try {
+			this.con = dbconfig.info(); //dconfig 안의 info를 가지고오자
+		}
+		catch(Exception e) {
+			System.out.println("DB 접속오류!!");
+		}
+	}
+	
+	protected int modify_sql(String pidx, String pcode, String pmoney, String psale, String puse) {
+		try {
+			this.dbcon();
+			String qsql = "update product set pname=?,pmoney=?,psales=?,puse=? where pidx=? and pcode=?";
+		}
+		catch(Exception e) {
+			System.out.println("SQL 문법 오류 발생");
+		}
+		
+		return 0;
+	}
+}

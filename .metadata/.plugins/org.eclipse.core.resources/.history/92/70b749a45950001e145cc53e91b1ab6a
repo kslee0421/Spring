@@ -1,0 +1,24 @@
+package sp1;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.util.ArrayList;
+//16
+public class product_modify {
+	Connection con = null;
+	private void dbcon() { //데이터 베이스를 바꿀 수 없게 private
+		try {
+			this.con = dbconfig.info(); //dconfig 안의 info를 가지고오자
+		}
+		catch(Exception e) {
+			System.out.println("DB 접속오류!!");
+		}
+	}
+
+	protected ArrayList<String> view_ok(String idx){
+		this.dbcon(); //여기서 대신 불러와서 실행 할 수 있게 DB메소드를 실행
+		//20 
+		String sql = "select * from product where pidx=?";
+		return null;
+	}
+}

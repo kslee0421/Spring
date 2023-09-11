@@ -1,0 +1,22 @@
+package sp1;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+//13
+public class product_modify {
+	Connection con = null;
+	public product_modify() {
+		try {
+			this.con = dbconfig.info(); //dconfig 안의 info를 가지고오자
+		}
+		catch(Exception e) {
+			System.out.println("DB 접속오류!!");
+		}
+	}
+
+	private ArrayList<String> view_ok(String idx){
+		//13
+	
+		return null;
+	}
+}

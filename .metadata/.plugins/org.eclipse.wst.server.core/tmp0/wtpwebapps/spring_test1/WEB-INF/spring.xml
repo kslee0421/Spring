@@ -12,7 +12,7 @@
 		">
 	<annotation-driven/><!-- @Controller @RequestMapping  -->
 	<resources location="/" mapping="/**"></resources> <!--location= "/" : 최상위-->
-		
+	
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/"></beans:property>
 		<beans:property name="suffix" value=".jsp"></beans:property>  
