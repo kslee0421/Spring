@@ -1,5 +1,6 @@
 package sp1;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.PasswordAuthentication;
@@ -21,13 +22,30 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class webpage2 {
 	PrintWriter pw = null;
+	
+	@PostMapping("/fileok.do")
+	public void upload(MultipartFile mfile, HttpServletRequest req, Model m) throws Exception{  //void라 responX html에서 쓴 name 값 가지고온다
+		String filename = mfile.getOriginalFilename();
+		long filesize =mfile.getSize();
+		String url = req.getServletContext().getRealPath("/fileup/") + filename;
+		
+		System.out.println(url);
+		
+		File f = new File(url);
+		FileCopyUtils.copy(mfile.getBytes(),f);  //spring 전용 파일업로드 클래스
+		System.out.println("업로드 파일 정상적으로 진행 완료!!");
+		
+	}
+
 	
 	@PostMapping("/product_modifyok.do")
 	public String ok_modify(HttpServletRequest req, HttpServletResponse res) { //23  페이지가 있을 때는 view가 없을때 respon쓴다

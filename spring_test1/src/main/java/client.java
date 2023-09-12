@@ -27,11 +27,13 @@ public class client {
 				InputStream is2 = sc.getInputStream();
 				OutputStream os2 = sc.getOutputStream();
 				
+				//메세지를 Server 보내는 파트
 				System.out.println("입력하실 내용을 적어주세요: ");
 				String msg = mid + "님 : " + sn.nextLine();
 				os2.write(msg.getBytes());
 				os2.flush();
 				
+				//Server에서 Client 메세지를 받는 파트
 				byte[] data = new byte[1024];
 				int n = is2.read(data);
 				String smsg =new String (data,0,n);

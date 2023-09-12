@@ -1,0 +1,18 @@
+//외부 url 접속 정보 알아오기
+
+import java.net.URL;
+import java.net.URLConnection;
+
+public class net3 {
+
+	public static void main(String[] args) {
+		String url = "https://attrangs.co.kr/?_sta1=MUwwTDEwMDFMU0wxMzU0TDBMMEwwTE5MMDAw";
+		URL urls = new URL(url);
+		URLConnection con = urls.openConnection();
+		
+		System.out.println(urls.getProtocol()); //http, https
+		System.out.println(urls.getPort());
+
+	}
+
+}

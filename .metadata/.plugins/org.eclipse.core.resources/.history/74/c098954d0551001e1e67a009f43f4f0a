@@ -1,0 +1,12 @@
+import java.net.InetAddress;
+
+public class net1 {
+//네트워크 기초
+	public static void main(String[] args) throws Exception{
+		//Inet Addresss : IpnetworkAddress
+		
+		InetAddress ia = InetAddress.getByName("localhost"); 
+		System.out.println(ia);
+	}
+
+}
