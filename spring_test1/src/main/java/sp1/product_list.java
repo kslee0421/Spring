@@ -13,6 +13,7 @@ import javax.naming.spi.DirStateFactory.Result;
 //Module
 public class product_list { //3
 	Connection con = null;
+	PreparedStatement ps = null; //interface
 	
 	public product_list() { //즉시실행
 		try {
@@ -25,7 +26,6 @@ public class product_list { //3
 	}
 	//5 DTo와 관계없는 데이터 갯수를 파악
 	public int data_ea() {
-		PreparedStatement ps = null; //interface
 		ResultSet rs = null;
 		int ea = 0;;
 		try {

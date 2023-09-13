@@ -35,6 +35,6 @@ public class product_ok {
 			System.out.println("SQL 문법 오류 발생");
 		}
 		
-		return 0;
+		return sign;
 	}
 }

@@ -1,9 +1,0 @@
-package sp1;
-
-public class userdata {
-	String mid = null;
-	String mname = null;
-	public userdata (String data1, String data2) {
-		this.mid = data1;
-	}
-}

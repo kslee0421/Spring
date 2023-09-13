@@ -49,8 +49,8 @@ public class webpage2 {
 	
 	@PostMapping("/product_modifyok.do")
 	public String ok_modify(HttpServletRequest req, HttpServletResponse res) { //23  페이지가 있을 때는 view가 없을때 respon쓴다
-		PrintWriter pw = null;
 		res.setContentType("text/html; charset=utf-8");
+		
 		String pidx = req.getParameter("pidx");
 		String pcode = req.getParameter("pcode");
 		String pname = req.getParameter("pname");
@@ -58,19 +58,21 @@ public class webpage2 {
 		String pimg = req.getParameter("pimg");
 		String psale = req.getParameter("psale");
 		String puse = req.getParameter("puse");
+		
 		product_ok ok = new product_ok();
 		String msg = "";
-		System.out.println(ok);
+		
+		//System.out.println(ok);
 		int result = ok.modify_sql(pidx, pcode, pname, pmoney, pimg, psale, puse);
 
 		if(result == 1) {
 			msg = "<script>alert('정상적으로 수정 완료 되었습니다.');"
-					+ "location.href='./product_list.do'"
+					+ "location.href='./product_list.do';"
 					+ "</script>";
 		}
 		else {
 			msg = "<script>alert('수정 내용이 올바르지 않습니다.');"
-					+ "history.go(-1)"
+					+ "history.go(-1);"
 					+ "</script>";
 		}
 		try {			
